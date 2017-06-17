@@ -1,0 +1,35 @@
+<div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Task Detail</th>
+                <th>Status</th>
+                <th>Created Date</th>
+                <th>Complete</th>
+                <th>Edit</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let task of tasks; trackBy: task?._id; let taskIndex = index;"> 
+                <td style="width:60%">{{task.description}}</td>
+                <td style="width:10%">{{task.description}}</td>
+                <td style="width:15%">{{task.description}}</td>
+                <td style="width:5%;">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </td>
+                <td style="width:5%">
+                    <span style="cursor: pointer" (click)="editTask(task)" class="glyphicon glyphicon-edit"></span>
+                </td>
+                <td style="width:5%">
+                    <span style="cursor: pointer" (click)="deleteTask(task)" class="glyphicon glyphicon-trash"></span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-md-9">
+            <a routerLink="input">Create New Task</a>
+        </div>
+  </div>
+</div>

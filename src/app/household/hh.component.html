@@ -1,0 +1,10 @@
+<div>
+  <h1> Manage my family</h1>
+</div>
+<div>
+  <tabset>
+    <tab (select)="routeModules('Tasks')" heading="Task Management"></tab>
+    <tab (select)="routeModules('Expense')" heading="Expense"></tab>
+  </tabset>
+</div>
+<router-outlet></router-outlet>

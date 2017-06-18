@@ -1,35 +1,27 @@
 <div>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Task Detail</th>
-                <th>Status</th>
-                <th>Created Date</th>
-                <th>Complete</th>
-                <th>Edit</th>
-                <th>Remove</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let task of tasks; trackBy: task?._id; let taskIndex = index;"> 
-                <td style="width:60%">{{task.description}}</td>
-                <td style="width:10%">{{task.taskStatus}}</td>
-                <td style="width:15%">{{task.createdOn | date:'MM/dd/yy' | uppercase}}</td>
-                <td style="width:5%;">
-                    <span *ngIf="task.taskStatus == 'Pending'" style="cursor: pointer" (click)="showCompleteModal(task)" 
-                    class="glyphicon glyphicon-ok" title="Click to complete task"></span>
-                </td>
-                <td style="width:5%">
-                    <span style="cursor: pointer" (click)="editTask(task)" class="glyphicon glyphicon-edit" 
-                    title="Click to edit task"></span>
-                </td>
-                <td style="width:5%">
-                    <span style="cursor: pointer" (click)="showDeleteModal(task)" class="glyphicon glyphicon-trash" 
-                    title="Click to delete task"></span>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="row" style="min-height: 7rem;" *ngFor="let task of tasks; trackBy: task?.id;">
+        <div style="background-color: #d9dce0; min-height: 6rem;font-weight: 400;position: relative">
+            <div>
+                <span class="col-sm-7">{{task.description}}</span>
+                <span class="col-sm-2">{{task.taskStatus}}</span>
+                <span class="col-sm-3">{{task.createdOn | date:'MM/dd/yy' | uppercase}}</span>
+            </div>
+            <div style="position: absolute; bottom:0;">
+                <span class="col-sm-1">
+                    <i style="cursor: pointer" (click)="editTask(task)" class="glyphicon glyphicon-edit" 
+                        title="Click to edit task"></i>
+                </span>
+                <span class="col-sm-1">
+                    <i style="cursor: pointer" (click)="showDeleteModal(task)" class="glyphicon glyphicon-trash" 
+                        title="Click to delete task"></i>
+                </span>
+                <span class="col-sm-1">
+                    <i *ngIf="task.taskStatus == 'Pending'" style="cursor: pointer" (click)="showCompleteModal(task)" 
+                        class="glyphicon glyphicon-ok" title="Click to complete task"></i>
+                </span>
+            </div>
+        </div>
+    </div>
     <!--Delete confirmation box-->
     <div class="modal fade" bsModal #deleteModal="bs-modal" [config]="{backdrop: 'static'}"
         tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">

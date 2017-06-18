@@ -3,7 +3,15 @@
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.28.3.
 
 ## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+    ## To run UI
+    Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+    ## To run NodeJS
+    Navigate to Self-Mgmt\api and run npm build to install all NodeJS dependancy. Run 'nodemon app' command to run NODEJS API.
+    To test API go to http://localhost:3000/
+
+    ## To run MongoDB
+    Run command prompt as admin and navigate to 'C:\Program Files\MongoDB\Server\3.4\bin>' folder location. Run 'mongod.exe' command to keep mongo DB running.
 
 ## Code scaffolding
 

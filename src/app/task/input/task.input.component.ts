@@ -15,8 +15,11 @@ export class TaskInputComponent implements OnInit, OnDestroy {
     taskForm: FormGroup;
     taskData: TaskModel;
     isIdHidden: boolean = true;
+    taskStatus: string = 'Pending';
     private subForParam: any;
-    constructor(private taskService: TaskService, private router : Router, private actRouter: ActivatedRoute) { }
+    constructor(private taskService: TaskService, private router : Router, private actRouter: ActivatedRoute) {
+      
+     }
 
     ngOnInit() {
       let taskId:string = '';
@@ -39,21 +42,24 @@ export class TaskInputComponent implements OnInit, OnDestroy {
     setFormInputFields() : void{
       this.taskForm = new FormGroup({
             id: new FormControl(this.taskData ? this.taskData.id : null),
-            description: new FormControl(this.taskData ? this.taskData.description : null, Validators.required)
+            description: new FormControl(this.taskData ? this.taskData.description : null, Validators.required),
+            taskStatus: new FormControl(this.taskData ? this.taskData.taskStatus : 'Pending', Validators.required)
         });
     }
 
     onSubmit(){
       if(this.taskForm.value){
-        let task : TaskModel = {
-          id : this.taskForm.value.id,
-          description: this.taskForm.value.description
-        }
-        task.id ? this.updateTask(task) : this.addNewTask(task);
+        this.taskForm.value.id ? this.updateTask() : this.addNewTask();
       }
     }
 
-    addNewTask(task : TaskModel){
+    addNewTask(){
+      let task : TaskModel = {
+        id : this.taskForm.value.id,
+        description: this.taskForm.value.description,
+        createdOn: String(new Date()),
+        taskStatus: 'Pending'
+      }
       this.taskService.addTask(task).subscribe(
         (result) => {
           if(result.ok){
@@ -66,7 +72,13 @@ export class TaskInputComponent implements OnInit, OnDestroy {
       )
     }
 
-    updateTask(task : TaskModel){
+    updateTask(){
+      let task : TaskModel = {
+        id : this.taskForm.value.id,
+        description: this.taskForm.value.description,
+        createdOn: String(new Date()),
+        taskStatus: this.taskForm.value.taskStatus
+      }
       this.taskService.updateTask(task).subscribe(
         (result) => {
           if(result.ok){

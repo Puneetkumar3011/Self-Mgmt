@@ -1,20 +1,31 @@
-<form class="form-horizontal" [formGroup]="taskForm" (ngSubmit)="onSubmit()">
-    <div class="form-group" [hidden]="isIdHidden">
-        <label class="col-sm-3 control-label" for="id">Id</label>
-        <div class="col-sm-7">
-          <input type="text" id="id" class="form-control" formControlName="id">
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-3 control-label" for="description">Task Detail</label>
-        <div class="col-sm-7">
-          <input type="text" id="description" class="form-control" formControlName="description">
-        </div>
-    </div>
-    <div class="form-group">
-      <div class="col-sm-offset-3 col-sm-4">
-        <button class="btn btn-primary" type="submit" [disabled]="!taskForm.valid">Submit</button>
-        <button class="btn btn-default" (click)="cancelEdit()" type="Cancel">Cancel</button>
+<div>
+  <form class="form-horizontal" [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+      <div class="form-group" [hidden]="isIdHidden">
+          <label class="col-sm-3 control-label" for="id">Id</label>
+          <div class="col-sm-7">
+            <input type="text" id="id" class="form-control" formControlName="id">
+          </div>
       </div>
-    </div>
-</form>
+      <div class="form-group">
+          <label class="col-sm-3 control-label" for="description">Task Detail</label>
+          <div class="col-sm-7">
+            <input type="text" id="description" class="form-control" formControlName="description">
+          </div>
+      </div>
+      <div class="form-group" [hidden]="!taskForm.value.id">
+          <label class="col-sm-3 control-label" for="taskStatus">Status</label>
+          <div class="col-sm-7">
+            <div class="btn-group">
+              <label class="btn btn-success" [(ngModel)]="taskStatus" formControlName="taskStatus" btnRadio="Pending">Pending</label>
+              <label class="btn btn-success" [(ngModel)]="taskStatus" formControlName="taskStatus" btnRadio="Completed">Completed</label>
+            </div>
+          </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-4">
+          <button class="btn btn-primary" type="submit" [disabled]="!taskForm.valid">Submit</button>
+          <button class="btn btn-default" (click)="cancelEdit()" type="Cancel">Cancel</button>
+        </div>
+      </div>
+  </form>
+</div>

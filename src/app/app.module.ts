@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { AlertModule, ModalModule, CarouselModule, TabsModule } from 'ngx-bootstrap';
+import { AlertModule, ModalModule, CarouselModule, TabsModule, DatepickerModule, ButtonsModule } from 'ngx-bootstrap';
 
 import { routing } from './app.routing';
 import { AppComponent } from './app.component';
@@ -30,7 +30,9 @@ import { TaskListComponent } from './task/list/task.list.component';
     AlertModule.forRoot(),
     ModalModule.forRoot(),
     CarouselModule.forRoot(),
-    TabsModule.forRoot()
+    TabsModule.forRoot(),
+    DatepickerModule.forRoot(),
+    ButtonsModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

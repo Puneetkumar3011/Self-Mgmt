@@ -13,20 +13,65 @@
         <tbody>
             <tr *ngFor="let task of tasks; trackBy: task?._id; let taskIndex = index;"> 
                 <td style="width:60%">{{task.description}}</td>
-                <td style="width:10%">{{task.description}}</td>
-                <td style="width:15%">{{task.description}}</td>
+                <td style="width:10%">{{task.taskStatus}}</td>
+                <td style="width:15%">{{task.createdOn | date:'MM/dd/yy' | uppercase}}</td>
                 <td style="width:5%;">
-                    <span class="glyphicon glyphicon-ok"></span>
+                    <span *ngIf="task.taskStatus == 'Pending'" style="cursor: pointer" (click)="showCompleteModal(task)" 
+                    class="glyphicon glyphicon-ok" title="Click to complete task"></span>
                 </td>
                 <td style="width:5%">
-                    <span style="cursor: pointer" (click)="editTask(task)" class="glyphicon glyphicon-edit"></span>
+                    <span style="cursor: pointer" (click)="editTask(task)" class="glyphicon glyphicon-edit" 
+                    title="Click to edit task"></span>
                 </td>
                 <td style="width:5%">
-                    <span style="cursor: pointer" (click)="deleteTask(task)" class="glyphicon glyphicon-trash"></span>
+                    <span style="cursor: pointer" (click)="showDeleteModal(task)" class="glyphicon glyphicon-trash" 
+                    title="Click to delete task"></span>
                 </td>
             </tr>
         </tbody>
     </table>
+    <!--Delete confirmation box-->
+    <div class="modal fade" bsModal #deleteModal="bs-modal" [config]="{backdrop: 'static'}"
+        tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title pull-left">Please Confirm</h4>
+                    <button type="button" class="close pull-right" aria-label="Close" (click)="deleteModal.hide()">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{delMsg}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" (click)="deleteModal.hide()">Cancel</button>
+                    <button type="button" (click)="deleteTask()" class="btn btn-primary">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Complete confirmation box-->
+    <div class="modal fade" bsModal #completeModal="bs-modal" [config]="{backdrop: 'static'}"
+        tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title pull-left">Please Confirm</h4>
+                    <button type="button" class="close pull-right" aria-label="Close" (click)="completeModal.hide()">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{completeMsg}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" (click)="completeModal.hide()">Cancel</button>
+                    <button type="button" (click)="updateTask()" class="btn btn-primary">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-9">
             <a routerLink="input">Create New Task</a>

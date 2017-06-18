@@ -50,7 +50,9 @@ router.post('/', function (req, res, next) {
     console.log('Start: task post');
 
     var taskModel = new TaskModel({
-        description: req.body.description
+        description: req.body.description,
+        taskStatus: req.body.taskStatus,
+        createdOn: new Date()
     });
     taskModel.save(function (err, result) {
         if (err) {
@@ -81,7 +83,9 @@ router.patch('/:id', function (req, res, next) {
                 error: {savedTask: 'data not found for given id in SelfTask table'}
             });
         }
+        // set data to save
         savedTask.description = req.body.description;
+        savedTask.taskStatus = req.body.taskStatus;
         savedTask.save(function(err, result) {
             if (err) {
                 return res.status(500).json({

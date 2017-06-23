@@ -7,6 +7,7 @@ var mongoose = require('mongoose');
 
 /** routes definition */
 var taskRoutes = require('./routes/task/app');
+var errRoutes = require('./routes/error/app');
 
 var app = express();
 mongoose.connect('localhost:27017/self-mgmt');
@@ -22,7 +23,9 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PATCH, DELETE, OPTIONS');
     next();
 });
+// routes
 app.use('/api/task', taskRoutes);
+app.use('/api/error', errRoutes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

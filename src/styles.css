@@ -114,7 +114,11 @@ body {
   background-color: #428bca;
 }
 
-
+.divList
+{
+  background-color:blue;
+  position:relative;  /*so that .modal & .modal-backdrop gets positioned relative to it */
+}
 
 
 

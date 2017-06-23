@@ -29,6 +29,7 @@ export class TaskInputComponent implements OnInit, OnDestroy {
           this.getTaskDetail(taskId);
         }
       });
+      //this.throwErrorTest();
     }
 
     getTaskDetail(taskId: string){

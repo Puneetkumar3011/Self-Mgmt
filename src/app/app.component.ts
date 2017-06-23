@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
 import { TaskService } from './task/task.service';
+import { LogService } from './error/error.service';
 
 @Component({
   selector: 'app-root',

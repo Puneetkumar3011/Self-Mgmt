@@ -13,6 +13,7 @@ import { ExpenseComponent } from './expense/expense.component';
 import { TaskInputComponent } from './task/input/task.input.component';
 import { TaskListComponent } from './task/list/task.list.component';
 import { ErrorComponent } from './error/error.component';
+import { LogService } from './log.service';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { ErrorComponent } from './error/error.component';
     ButtonsModule.forRoot()
   ],
   providers: [
+    LogService,
     {
       provide: ErrorHandler, 
       useClass: GlobalErrorHandler

@@ -1,5 +1,5 @@
 <div>
-  <form class="form-horizontal" [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+  <form class="form-horizontal" [formGroup]="taskForm" (ngSubmit)="onSubmit($event)">
       <div class="form-group" [hidden]="isIdHidden">
           <label class="col-sm-3 control-label" for="id">Id</label>
           <div class="col-sm-7">
@@ -16,8 +16,8 @@
           <label class="col-sm-3 control-label" for="taskStatus">Status</label>
           <div class="col-sm-7">
             <div class="btn-group">
-              <label class="btn btn-success" [(ngModel)]="taskStatus" formControlName="taskStatus" btnRadio="Pending">Pending</label>
-              <label style="margin-left: 1px;" class="btn btn-success" [(ngModel)]="taskStatus" formControlName="taskStatus" btnRadio="Completed">Completed</label>
+              <label class="btn btn-success" ngDefaultControl [(ngModel)]="taskStatus" formControlName="taskStatus" btnRadio="Pending">Pending</label>
+              <label style="margin-left: 1px;" ngDefaultControl class="btn btn-success" [(ngModel)]="taskStatus" formControlName="taskStatus" btnRadio="Completed">Completed</label>
             </div>
           </div>
       </div>

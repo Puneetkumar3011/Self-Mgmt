@@ -22,12 +22,13 @@ export class TaskInputComponent implements OnInit, OnDestroy {
      }
 
     ngOnInit() {
-      let taskId:string = '';
-      this.subForParam = this.actRouter.params.subscribe(params => taskId = params['id']);
       this.setFormInputFields();
-      if(taskId){
-        this.getTaskDetail(taskId);
-      }
+      this.subForParam = this.actRouter.params.subscribe((params) => {
+        let taskId = params['id'];
+        if(taskId){
+          this.getTaskDetail(taskId);
+        }
+      });
     }
 
     getTaskDetail(taskId: string){
@@ -47,19 +48,27 @@ export class TaskInputComponent implements OnInit, OnDestroy {
         });
     }
 
-    onSubmit(){
-      if(this.taskForm.value){
-        this.taskForm.value.id ? this.updateTask() : this.addNewTask();
+    onSubmit(event: Event){
+      try
+      {
+        if(this.taskForm.value){
+          let task : TaskModel = {
+            id : this.taskForm.value.id,
+            description: this.taskForm.value.description,
+            createdOn: String(new Date()),
+            taskStatus: this.taskForm.value.taskStatus
+          }
+          this.taskForm.value.id ? this.updateTask(task) : this.addNewTask(task);
+        }
+      }
+      catch(err){
+        event.preventDefault();
+        throw err;
       }
     }
 
-    addNewTask(){
-      let task : TaskModel = {
-        id : this.taskForm.value.id,
-        description: this.taskForm.value.description,
-        createdOn: String(new Date()),
-        taskStatus: 'Pending'
-      }
+    addNewTask(task: TaskModel){
+      //this.throwErrorTest();
       this.taskService.addTask(task).subscribe(
         (result) => {
           if(result.ok){
@@ -72,13 +81,7 @@ export class TaskInputComponent implements OnInit, OnDestroy {
       )
     }
 
-    updateTask(){
-      let task : TaskModel = {
-        id : this.taskForm.value.id,
-        description: this.taskForm.value.description,
-        createdOn: String(new Date()),
-        taskStatus: this.taskForm.value.taskStatus
-      }
+    updateTask(task: TaskModel){
       this.taskService.updateTask(task).subscribe(
         (result) => {
           if(result.ok){
@@ -89,6 +92,10 @@ export class TaskInputComponent implements OnInit, OnDestroy {
           console.log(err);
         }
       )
+    }
+
+    private throwErrorTest(){
+      throw new Error('Created this error to demonstrate error handling');
     }
 
     cancelEdit(){

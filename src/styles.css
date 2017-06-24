@@ -114,11 +114,22 @@ body {
   background-color: #428bca;
 }
 
-/*.divList
+.divList
 {
-  background-color:blue;
   position:relative;  
-}*/
+}
+
+.modal{
+  position: absolute;
+  top: 20%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1050;
+  display: noe;
+  overflow: hidden;
+  outline: 0;
+}
 
 
 
